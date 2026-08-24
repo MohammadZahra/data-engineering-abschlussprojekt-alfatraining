@@ -15,6 +15,9 @@ Logical entities represented:
 
 Transaction coverage: 2024-01-01 through 2026-07-31 (about 31 months).
 */
+USE BankCardDB;
+GO
+
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
