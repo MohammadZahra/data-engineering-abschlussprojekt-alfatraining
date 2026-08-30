@@ -1,10 +1,12 @@
 # Bank Card Transaction Analysis
 
-A compact end-to-end Data Engineering project built as the final project of my alfatraining training program. The goal was to design a small analytical platform for bank card transactions — starting from a relational business database and ending with a queryable Data Warehouse.
+A compact Data Engineering project developed as the final project of my alfatraining training program. The goal was to build an analytical solution for bank card transactions. The project starts with a relational business database and ends with a queryable Data Warehouse.
 
 ## Project Overview
 
-The source system models customers, accounts, cards, merchants, merchant categories and card transactions. The analytical layer is implemented as a **Star Schema** with one transaction fact table and four dimensions:
+The source system models customers, accounts, cards, merchants, merchant categories and card transactions.
+
+The analytical layer is implemented as a Star Schema with one transaction fact table and four dimensions:
 
 - Customer
 - Card
@@ -17,29 +19,31 @@ The Data Warehouse supports analyses such as spending by region and merchant cat
 
 `Source Data → Staging → Business DB → Data Warehouse → Analytical Queries`
 
-Main steps:
+The main project steps were:
 
 1. Create and populate staging tables with AI-generated sample banking data.
-2. Explore, clean and load the normalized Business Database.
+2. Explore, clean and load the relational Business Database.
 3. Design the multidimensional model and logical Star Schema.
-4. Create the physical SQL Server Data Warehouse.
-5. Define source-to-target mappings for all dimensions and the fact table.
-6. Implement ETL with SQL Server Stored Procedures.
-7. Perform incremental fact loading, currency conversion to EUR and ETL validation.
-8. Run analytical SQL queries against the finished Data Warehouse.
+4. Create the physical Data Warehouse in SQL Server.
+5. Define source-to-target mappings for dimensions and the fact table.
+6. Implement the ETL process using Stored Procedures.
+7. Perform incremental loading, currency conversion and ETL validation.
+8. Query the completed Data Warehouse to answer analytical business questions.
 
-## Key Technical Topics
+## Technologies & Concepts
 
 - Microsoft SQL Server / T-SQL
-- Relational database design and normalization
-- Staging and data cleaning
+- Relational database design
+- Data cleaning and staging
 - Data Warehouse modelling
-- Star Schema and multidimensional modelling
+- Star Schema
+- Multidimensional modelling
 - ETL with Stored Procedures
 - Source-to-target mapping
-- Slowly Changing Dimensions (SCD 0, 1 and 2)
-- Incremental loading with a load-control table
-- Data-quality and referential-integrity checks
+- Slowly Changing Dimensions (SCD)
+- Incremental loading
+- Data-quality validation
+- Analytical SQL queries
 
 ## Repository Structure
 
@@ -47,30 +51,23 @@ Main steps:
 Project/
 ├── Business_DB/
 │   ├── Scripts/        # staging, cleaning, loading and verification
-│   ├── Draw.io/        # ER modelling files
-│   └── *.pdf           # database design and import documentation
+│   ├── Draw.io/        # ER models
+│   └── *.pdf           # design and import documentation
 │
 ├── DWH/
 │   ├── Scripts/        # Data Warehouse creation
 │   ├── Draw.io/        # mER, Star Schema and SCD models
-│   └── *.pdf           # DWH design and design decisions
+│   └── *.pdf           # DWH design documentation
 │
 └── ETL/
-    ├── Scripts/        # ETL setup, dimensions, fact load, execution and testing
+    ├── Scripts/        # ETL procedures, execution, testing and analytical queries
     └── ETL_Mapping_BankCardDWH.xlsx
 
 Presentation/           # final project presentation
-Project Brief/          # original project description
-Daily - Agile Work/     # short daily project reports
+Project Brief/          # project description
+Daily - Agile Work/     # daily project reports
 ```
 
-## Design Notes
+## About the Project
 
-- Transaction amounts from multiple currencies are normalized to **EUR** during ETL using fixed reference exchange rates.
-- Customer and Merchant dimensions contain separate Data Warehouse IDs and source-system IDs, allowing historical versions to be represented without introducing an additional SCD key.
-- Type 2 history uses `ValidFrom` and `ValidTo` fields.
-- The sample source data does not contain historical change timestamps; the initial SCD records therefore use a conventional initial validity date.
-
-## Purpose
-
-This repository documents the complete project workflow rather than only the final SQL scripts. It includes the modelling decisions, source-to-target mapping, implementation, validation and analytical queries so that the reasoning behind the Data Warehouse can be followed from source system to analysis.
+The repository contains more than the final SQL implementation. It documents the complete workflow from source-system design and data preparation to Data Warehouse modelling, ETL implementation, validation and analytical querying.
